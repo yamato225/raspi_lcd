@@ -427,7 +427,7 @@ time_t pixelTest(int width, int height) {
 	uint16_t p, c;
 	uint32_t isize, ioffset, iwidth, iheight, ibpp, fpos, rowbytes;
 
-	FILE *f = fopen("image958.bmp", "rb");
+	FILE *f = fopen("ksk/ksk_001.bmp", "rb");
 	if (f != NULL) {
 		fseek(f, 0L, SEEK_SET);
 		fread(buf, 30, 1, f);
@@ -448,11 +448,15 @@ time_t pixelTest(int width, int height) {
 	for (i=0; i<(int)iheight; i++){
         for (j=0; j<(int)iwidth; j++) {
             fread(buf, 3, 1, f);
-            image[i*(iwidth-1)+j]=rgb565_conv(buf[0], buf[1], buf[2]);
+            //image[(iheight-1-i)*iwidth+iwidth-1-j]=rgb565_conv(buf[0], buf[1], buf[2]);
+            image[128-i+j*128]=rgb565_conv(buf[0], buf[1], buf[2]);
             //color=rgb565_conv(buf[0], buf[1], buf[2]);
             //lcdDrawPixel(j,iheight-i,color);
         }
     }
+
+    fclose(f);
+
     struct timeval startTime, endTime;
     gettimeofday(&startTime, NULL);
 
@@ -464,8 +468,6 @@ time_t pixelTest(int width, int height) {
             lcdDrawPixel(j,iheight-i,image[j][iheight-i]);
         }
     }*/
-
-    fclose(f);
 
     /*uint16_t red;
     uint16_t green;

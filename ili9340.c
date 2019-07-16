@@ -388,7 +388,7 @@ void lcdDrawImage(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t *
 	for (i=0; i<159; i++){
         for (j=0; j<128; j++) {
             //fread(buf, 3, 1, f);
-            bcm2835_spi_write(image[(159-i)*127+(127-j)]);
+            bcm2835_spi_write(image[i*128+j]);
         }
   }
 }
